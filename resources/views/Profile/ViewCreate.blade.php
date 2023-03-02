@@ -14,7 +14,7 @@
     @endif
     <div class="container">
 
-        <form action="{{ route('Store') }}" method="POST">
+        <form action="{{ route('Store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label>Name</label>
@@ -51,6 +51,11 @@
                 @error('bio')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
+            </div>
+            <div class="form-group">
+                <label>photo</label>
+               <input type="file"  class="form-control" name="image" id="">
+               
             </div>
             <div class="D-grid my-3">
                 <input type="submit" class="btn btn-primary btn-block" value="Ajouter" />

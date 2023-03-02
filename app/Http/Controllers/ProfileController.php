@@ -41,8 +41,8 @@ class ProfileController extends Controller
 
     public function createView(profile $profile)
     {
-        dd( $profile);
-       /* return view('Profile.ViewCreate');*/
+        // dd( $profile);
+        return view('Profile.ViewCreate');
     }
 
     //model binding
@@ -69,7 +69,7 @@ class ProfileController extends Controller
         'bio' => $bio
         ]
         ); */
-        profile::create($request->input());// $request->post :return all input value
+        profile::create($request->input()); // $request->post :return all input value
         //on peut faire aussi
         // profile::create($request->post());
         return redirect()->route('Profile')->with('success', 'Votre compte a Bien été Ajouter'); // key and value save a une session
@@ -83,18 +83,23 @@ class ProfileController extends Controller
 
     }
 
-    public function Update(profile $profile)
+    public function Update(ProfileRequest $request, profile $profile)
     {
+         $ProfileValidated = $request->validated();// content the data from submiting form
+        //  $ProfileValidated["id"]=Hash::make($profile->id);
 
+       $profile->fill($ProfileValidated);
 
-        $id = $profile;
-        return profile::find($profile);
+        $profile->save(); 
+        // dd($ProfileValidated);
+
+        return to_route("Profile.Details",$profile->id)->with("success", "votre Compte a ete Modifier ");
     }
 
     public function viewUpdate(profile $profile)
     {
-        $id = $profile;
-        $profil = profile::find($id);
+
+        $profil = $profile;
 
         return view("Profile.UpdateProfile", compact("profil"));
     }

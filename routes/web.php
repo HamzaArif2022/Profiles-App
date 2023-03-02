@@ -30,22 +30,25 @@ Route::get('/test', [test::class, 'test']);
 
 
 // affiche le details d'une profile par id
-Route::get('/ShowDetails/{id}', [ProfileController::class, 'show'])->where(["id" => "\d+"]);//pour filter par un autre parametre modelname:column_name (ShowDetails:name)
+Route::get('/ShowDetails/{id}', [ProfileController::class, 'show'])->where(["id" => "\d+"])->name("Profile.Details");//pour filter par un autre parametre modelname:column_name (ShowDetails:name)
 //// create Profil view
 Route::get('/Profile/create', [ProfileController::class, 'createView'])->name('create.profile');
 
 //// store the data
 Route::post('/Profile/store', [ProfileController::class, 'Store'])->name('Store');
+
+
 // Delete Profile
 Route::delete("/Profile/delete/{profile}", [ProfileController::class, "destroy"])->name("destroy");
 
 // update
-/*Route::put("/Profile/{profile}", [ProfileController::class, "Update"])->name("Update");*/
+Route::put("/Profile/{profile}", [ProfileController::class, "Update"])->name("Profile.Update");
 // update view
-Route::put("Profile/{profile}/edit", [ProfileController::class, "viewUpdate"])->name("viewUpdate");
+Route::get("Profile/{profile}/edit", [ProfileController::class, "viewUpdate"])->name("viewUpdate");
+
+
 
 // login view
-
 Route::view('/Login', 'Login.LoginView')->name("Login");
 //login
 Route::post("/connected", [LoginController::class, "connection"])->name("connected");

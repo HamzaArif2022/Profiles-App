@@ -21,9 +21,8 @@
         </div>
         <div style="z-index: 100">
 
-        <form action="{{route("viewUpdate",$Profile['id'])}}" method="post" >
+        <form action="{{route("viewUpdate",$Profile['id'])}}" method="get" >
             @csrf
-            @method('PUT')
             <button class="btn float-end btn-primary" type="submit">Update</button>
 
         </form>

@@ -24,10 +24,11 @@ class ProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            "email " => "email|unique:profiles",
-            "name" => "required|regex:/[a-zA-Z]+/i|unique:profiles|min:10",
+            "email " => "email",
+            "name" => "required|regex:/[a-zA-Z]+/i|min:10",
             "password" => "required|min:8|max:50|confirmed",
             "bio" => "required|max:100",
+            "image"=>"require|max:2080|mimes:jpeg,png,jpg,gif"
             // "name" => "size:20|",   size=20 caractere,
             // "age" => "integer|string",   integer=20 type,
         ];
