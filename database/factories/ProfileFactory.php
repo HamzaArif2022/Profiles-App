@@ -22,6 +22,7 @@ class ProfileFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'bio' => fake()->text(),
+            'image' => fake()->image(),
             'password' =>Hash::make('password'), // password
         ];
     }

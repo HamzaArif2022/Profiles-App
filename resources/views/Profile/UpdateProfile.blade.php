@@ -12,7 +12,7 @@
     </x-alert>
     @endif
     <form action="{{ route('Profile.Update',$profil["id"]) }}" method="POST" enctype="multipart/form-data">
-        @method("PUT")
+        @method("PUT") {{-- specifie la modification --}}
         @csrf
         <div class="form-group">
             <label>Name</label>

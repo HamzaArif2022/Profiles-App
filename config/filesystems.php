@@ -36,15 +36,15 @@ return [
             'throw' => false,
         ],
 
-        'public' => [
-            'driver' => 'local',
+        'public' => [ /* tout les users et accessible a la image*/
+             'driver' => 'local',
             'root' => storage_path('app/public'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
         ],
 
-        's3' => [
+        's3' => [ /* serveur amazon pour stocker les files and images */
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
             'secret' => env('AWS_SECRET_ACCESS_KEY'),

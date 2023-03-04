@@ -21,6 +21,6 @@ class ProfileSeeder extends Seeder
         // DB::table('profiles')->insert([
         //     'id'=>2,'name'=>Str::random(1,10),'email'=>Str::random(1,5).'@email.com','password'=>Hash::make('password'),'bio'=>Str::random(1,100)
         // ]);
-        profile::factory(100)->create();
+        profile::factory(50)->create();
     }
 }

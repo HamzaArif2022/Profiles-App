@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('profiles', function (Blueprint $table) {
-            $table->string("image",233)->after("bio");
+            $table->string("image",255)->after("bio"); /* Add column */
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('profiles', function (Blueprint $table) {
-             $table->dropColumn("image");
+            $table->dropColumn("image");
         });
     }
 };

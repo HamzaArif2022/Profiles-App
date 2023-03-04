@@ -24,7 +24,7 @@ class ProfileController extends Controller
         // dd($profiles->count()); return le nombre de document
         // dd($profiles->avg('id')); return lenght
 
-        return view('Profile.Profile', compact('profiles'));
+        return view('Profile.Profile', compact('profiles')); //profiles is contient every row in from the table
     }
 
 
@@ -46,16 +46,23 @@ class ProfileController extends Controller
     }
 
     //model binding
-    public function Store(ProfileRequest $request)
+    public function Store(ProfileRequest $request) // $request contient un un validation a partir d'une make:request
+
     {
         //validation de inputs
-        $request->validated();
-        //Hash d'une mote dde pass cripatge
-        $request["password"] = Hash::make($request->password);
-
-        // $feildsData["password"]=Hash::make($request->password);
-
-        // dd($request->post("name"));
+        $formFeilds=$request->validated();
+       
+        //Hash d'une mote de pass cripatge
+        $formFeilds["password"] = Hash::make($request->password);
+        // dd($request);
+        $filename = $request->file("image")->store("profile", "public"); // return un chaine de caractere qui conteint le chemin de la photo 
+        // dd($filename);
+        $formFeilds["email"]="hamza@gmail.com";
+        /* storeAs("path", "filename","diskfilesysteme") */
+        $formFeilds["image"] = $filename;
+        
+        // dd($formFeilds);
+        
 
         /* $email = $request->email;
         $name = $request->name;
@@ -69,12 +76,12 @@ class ProfileController extends Controller
         'bio' => $bio
         ]
         ); */
-        profile::create($request->input()); // $request->post :return all input value
+        profile::create($formFeilds); // $request->post :return all input value
         //on peut faire aussi
         // profile::create($request->post());
-        return redirect()->route('Profile')->with('success', 'Votre compte a Bien été Ajouter'); // key and value save a une session
+        return redirect()->route('Profile')->with('success', 'Votre compte a Bien été Ajouter'); // key and value enregistre a une session
     }
-
+    //supprission 
     public function destroy(profile $profile)
     {
         $profile->delete();
@@ -82,20 +89,6 @@ class ProfileController extends Controller
         return to_route("Profile")->with("success", "le Compte et bien ete Supprime");
 
     }
-
-    public function Update(ProfileRequest $request, profile $profile)
-    {
-         $ProfileValidated = $request->validated();// content the data from submiting form
-        //  $ProfileValidated["id"]=Hash::make($profile->id);
-
-       $profile->fill($ProfileValidated);
-
-        $profile->save(); 
-        // dd($ProfileValidated);
-
-        return to_route("Profile.Details",$profile->id)->with("success", "votre Compte a ete Modifier ");
-    }
-
     public function viewUpdate(profile $profile)
     {
 
@@ -103,5 +96,20 @@ class ProfileController extends Controller
 
         return view("Profile.UpdateProfile", compact("profil"));
     }
+    public function Update(ProfileRequest $request, profile $profile) // recupere les donne inser avec le id 
+
+    {
+        $ProfileValidated = $request->validated(); // validation les donne entrer
+        //  $ProfileValidated["id"]=Hash::make($profile->id);
+
+        $profile->fill($ProfileValidated);
+
+        $profile->save();
+        // dd($ProfileValidated);
+
+        return to_route("Profile.Details", $profile->id)->with("success", "votre Compte a ete Modifier ");
+    }
+
+
 
 }

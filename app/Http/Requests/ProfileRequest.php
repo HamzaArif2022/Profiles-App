@@ -28,7 +28,7 @@ class ProfileRequest extends FormRequest
             "name" => "required|regex:/[a-zA-Z]+/i|min:10",
             "password" => "required|min:8|max:50|confirmed",
             "bio" => "required|max:100",
-            "image"=>"require|max:2080|mimes:jpeg,png,jpg,gif"
+            "image"=>"image|max:20080|mimes:jpeg,png,svg,jpg,gif"//max:2080kb
             // "name" => "size:20|",   size=20 caractere,
             // "age" => "integer|string",   integer=20 type,
         ];
