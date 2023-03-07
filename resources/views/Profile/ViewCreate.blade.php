@@ -54,7 +54,7 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label>photo</label>
+                <label>Picture</label>
                 <input type="file" class="form-control" name="image" id="">
 
             </div>

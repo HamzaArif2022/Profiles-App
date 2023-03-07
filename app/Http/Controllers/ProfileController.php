@@ -31,7 +31,6 @@ class ProfileController extends Controller
     // show the details of the selecting Profile
 
     public function show(profile $id) // id qui herite mn le model profile
-
     {
         // $id = (int) $request->id; // disgnate the type of the id
         // $Profiles = profile::findOrFail($id); // if the id is not exists retun page Not found
@@ -41,41 +40,29 @@ class ProfileController extends Controller
 
     public function createView(profile $profile)
     {
-        // dd( $profile);
         return view('Profile.ViewCreate');
     }
 
     //model binding
     public function Store(ProfileRequest $request) // $request contient un un validation a partir d'une make:request
-
     {
         //validation de inputs
-        $formFeilds=$request->validated();
-       
+        $formFeilds = $request->validated(); // return array of inputs
+
         //Hash d'une mote de pass cripatge
         $formFeilds["password"] = Hash::make($request->password);
-        // dd($request);
-        $filename = $request->file("image")->store("profile", "public"); // return un chaine de caractere qui conteint le chemin de la photo 
-        // dd($filename);
-        $formFeilds["email"]="hamza@gmail.com";
-        /* storeAs("path", "filename","diskfilesysteme") */
-        $formFeilds["image"] = $filename;
-        
-        // dd($formFeilds);
-        
+        // stocke les image a la dossier Storage/profile 
+        // test si image existes ou no (condition de insert image si il existes)
+        if ($request->hasFile("image")) {
+            $filename = $request->file("image")->store("profile", "public"); // return un chaine de caractere qui conteint le chemin de la photo 
+            $formFeilds["image"] = $filename;
 
-        /* $email = $request->email;
-        $name = $request->name;
-        $bio = $request->bio;
-        $password = $request->password;
-        profile::create(
-        [
-        'name' => $name,
-        'email' => $email,
-        'password' => $password,
-        'bio' => $bio
-        ]
-        ); */
+        }
+        $formFeilds["email"] = "hamza@gmail.com";
+        /* storeAs("path", "filename","diskfilesysteme") */
+        // affecter la nouvelle valeur a la image proprite
+
+
         profile::create($formFeilds); // $request->post :return all input value
         //on peut faire aussi
         // profile::create($request->post());
@@ -97,11 +84,14 @@ class ProfileController extends Controller
         return view("Profile.UpdateProfile", compact("profil"));
     }
     public function Update(ProfileRequest $request, profile $profile) // recupere les donne inser avec le id 
-
     {
         $ProfileValidated = $request->validated(); // validation les donne entrer
-        //  $ProfileValidated["id"]=Hash::make($profile->id);
+        $ProfileValidated["password"]=Hash::make($profile->password);
+        if ($request->hasFile("image")) {
+            $filename = $request->file("image")->store("profile", "public"); // return un chaine de caractere qui conteint le chemin de la photo 
+            $ProfileValidated["image"] = $filename;
 
+        }
         $profile->fill($ProfileValidated);
 
         $profile->save();
