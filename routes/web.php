@@ -11,6 +11,8 @@ use App\Http\Controllers\test;
 use Illuminate\Http\Request;
 use App\Http\Controllers\getdata;
 
+use App\Models\profile;
+
 
 // Route::get(
 //     '/{name}',[HomeController::class,'index']
@@ -54,3 +56,7 @@ Route::view('/Login', 'Login.LoginView')->name("Login");
 Route::post("/connected", [LoginController::class, "connection"])->name("connected");
 // logout
 Route::get("Logout", [LoginController::class, "Logout"])->name("Logout");
+// retrive the delted data
+// Route::get("retrive",function(){
+//     return profile::withTrashed()->get();
+// });

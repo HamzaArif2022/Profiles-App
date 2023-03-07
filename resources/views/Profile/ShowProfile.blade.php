@@ -1,10 +1,10 @@
 <x-master title="Mon Profile">
     <h1>Mon Profile</h1>
-    <section class="vh-60" style="background-color: #097a84;">
+    <section class="vh-60" style="background-color: #eee;border-radius:40px ">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-lg-6 mb-4 mb-lg-0">
-                    <div class="card mb-3" style="border-radius: .5rem;">
+                    <div class="card mb-3" style="border-radius: 30px;">
                         <div class="row g-0">
                             <div class="col-md-4 gradient-custom text-center text-black"
                                 style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
