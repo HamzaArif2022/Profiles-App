@@ -47,7 +47,7 @@ class ProfileController extends Controller
     public function Store(ProfileRequest $request) // $request contient un un validation a partir d'une make:request
     {
         //validation de inputs
-        $formFeilds = $request->validated(); // return array of inputs
+        $formFeilds = $request->validated(); // validated : qui permet la validation auto 
 
         //Hash d'une mote de pass cripatge
         $formFeilds["password"] = Hash::make($request->password);
@@ -55,7 +55,7 @@ class ProfileController extends Controller
         // test si image existes ou no (condition de insert image si il existes)
         if ($request->hasFile("image")) {
             $filename = $request->file("image")->store("profile", "public"); // return un chaine de caractere qui conteint le chemin de la photo 
-            $formFeilds["image"] = $filename;
+            $formFeilds["image"] = $filename; // Modifier le fieled al la base donne avec la nouvelle valeur valeur de la image
 
         }
         $formFeilds["email"] = "hamza@gmail.com";
@@ -86,7 +86,7 @@ class ProfileController extends Controller
     public function Update(ProfileRequest $request, profile $profile) // recupere les donne inser avec le id 
     {
         $ProfileValidated = $request->validated(); // validation les donne entrer
-        $ProfileValidated["password"]=Hash::make($profile->password);
+        $ProfileValidated["password"] = Hash::make($profile->password);
         if ($request->hasFile("image")) {
             $filename = $request->file("image")->store("profile", "public"); // return un chaine de caractere qui conteint le chemin de la photo 
             $ProfileValidated["image"] = $filename;

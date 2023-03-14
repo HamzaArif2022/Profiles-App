@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ControllerHome;
-use  App\Http\Controllers\HomeController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\informationController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
@@ -14,11 +14,7 @@ use App\Http\Controllers\getdata;
 use App\Models\profile;
 
 
-// Route::get(
-//     '/{name}',[HomeController::class,'index']
-// )-> where(['name'=> '[A-Za-z]+']);
-
-Route::get('/', [ControllerHome::class, 'call'])->name("Home");/* call is a function in controlle */
+Route::get('/', [ControllerHome::class, 'call'])->name("Home"); /* call is a function in controlle */
 //list all profile from database
 Route::get('/Profile', [ProfileController::class, 'indexProfile'])->name('Profile');
 //Route setting
@@ -32,11 +28,11 @@ Route::get('/test', [test::class, 'test']);
 
 
 // affiche le details d'une profile par id
-Route::get('/ShowDetails/{id}', [ProfileController::class, 'show'])->where(["id" => "\d+"])->name("Profile.Details");//pour filter par un autre parametre modelname:column_name (ShowDetails:name)
+Route::get('/ShowDetails/{id}', [ProfileController::class, 'show'])->where(["id" => "\d+"])->name("Profile.Details"); //pour filter par un autre parametre modelname:column_name (ShowDetails:name)
 //// create Profil view
 Route::get('/Profile/create', [ProfileController::class, 'createView'])->name('create.profile');
 
-//// store the data
+//// store the data dans la bs
 Route::post('/Profile/store', [ProfileController::class, 'Store'])->name('Store');
 
 

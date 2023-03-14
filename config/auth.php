@@ -61,10 +61,10 @@ return [
 
     'providers' => [
         // 'users' => [
-            // 'driver' => 'eloquent',
-            // 'model' => App\Models\User::class,
+        // 'driver' => 'eloquent',
+        // 'model' => App\Models\User::class,
         // ],
-
+        // configure le authentification utilise la table profiles 
         'users' => [
             'driver' => 'database',
             'table' => 'profiles',

@@ -1,4 +1,4 @@
-@props(['type'])
+@props(['type']) {{-- prendre le type comme parameter  --}}
 
 <div class="alert alert-{{$type}} alert-dismissible fade show" role="alert">
     <strong> {{ $slot }}</strong>

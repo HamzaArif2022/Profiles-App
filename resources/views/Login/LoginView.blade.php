@@ -3,7 +3,7 @@
     <form action="{{ route('connected') }}" method="POST">
         @csrf
     <div class="form-group">
-        @include('Partails.AlertDanger'){{--  appelle decomposant qui gerer les erreur --}}
+        @include('Partails.AlertDanger'){{--  appelle decomposant qui gerer les erreur parceque tout les errueur il retourne a la page suivants --}}
         <label>Email</label>
         <input type="email" class="form-control" name="email" placeholder="Enter your email" value="{{old("email")}}" >
     </div>
