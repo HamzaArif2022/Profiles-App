@@ -20,11 +20,6 @@ Route::get('/Profile', [ProfileController::class, 'indexProfile'])->name('Profil
 //Route setting
 Route::get('/Details', [informationController::class, 'indexInformation']);
 Route::get('/test', [test::class, 'test']);
-// '\App\Http\Controllers\HomeController
-// Route::get(
-//     '/{name}',
-//     [HomeController::class, 'index']
-// )->whereNumber('name');
 
 
 // affiche le details d'une profile par id
@@ -43,6 +38,7 @@ Route::delete("/Profile/delete/{profile}", [ProfileController::class, "destroy"]
 Route::put("/Profile/{profile}", [ProfileController::class, "Update"])->name("Profile.Update");
 // update view
 Route::get("Profile/{profile}/edit", [ProfileController::class, "viewUpdate"])->name("viewUpdate");
+
 
 
 
