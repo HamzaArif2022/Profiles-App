@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('profiles', function (Blueprint $table) {
-            $table->string("image",255)->after("bio"); /* Add column */
+            $table->string("image",255)->default("default.png")->after("bio"); /* Add column */
         });
     }
 

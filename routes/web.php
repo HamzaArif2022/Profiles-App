@@ -14,7 +14,7 @@ use App\Http\Controllers\getdata;
 use App\Models\profile;
 
 
-Route::get('/', [ControllerHome::class, 'call'])->name("Home"); /* call is a function in controlle */
+Route::get('/', [ControllerHome::class, 'Home'])->name("Home"); /* call is a function in controlle */
 //list all profile from database
 Route::get('/Profile', [ProfileController::class, 'indexProfile'])->name('Profile');
 //Route setting
@@ -33,10 +33,10 @@ Route::post('/Profile/store', [ProfileController::class, 'Store'])->name('Store'
 
 // Delete Profile
 Route::delete("/Profile/delete/{profile}", [ProfileController::class, "destroy"])->name("destroy");
-
+//---------------- update--------------
 // update
 Route::put("/Profile/{profile}", [ProfileController::class, "Update"])->name("Profile.Update");
-// update view
+// update view layout form
 Route::get("Profile/{profile}/edit", [ProfileController::class, "viewUpdate"])->name("viewUpdate");
 
 
@@ -52,3 +52,9 @@ Route::get("Logout", [LoginController::class, "Logout"])->name("Logout");
 // Route::get("retrive",function(){
 //     return profile::withTrashed()->get();
 // });
+// on peut faire group by controller 
+// Route::controller("nom de controller")->group(function()=>{
+
+// })
+// on peut utillise ressouce pour bien organise les Route
+// Route::resources("path comun ",controller::class);

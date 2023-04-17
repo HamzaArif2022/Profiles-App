@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    // responsable for insert values in the table 
+    // responsable for insert values in the table based on the seeder
     {
         \App\Models\User::factory(10)->create();
 

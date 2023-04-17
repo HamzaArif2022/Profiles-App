@@ -1,4 +1,4 @@
-@props(['title']) {{-- make reuseble title --}}
+@props(['title']) {{-- make reuseble title / cette composant il defini dans tout les page  --}}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +23,7 @@
 
         @include('Partails\AlertAjouter') {{-- test si profile et bien ajouter --}}
 
-        {{ $slot }}{{--  all the content that's sourounded by the tag component it will be defind here  --}}
+        {{ $slot }}{{--  all the content that's sourounded by the tag component it will be defind here   its's looks like children in react --}}
     </div>
 
     @include('Partails.Footer'){{--  appell de footer  --}}

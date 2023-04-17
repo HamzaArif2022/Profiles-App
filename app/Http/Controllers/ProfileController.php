@@ -30,7 +30,7 @@ class ProfileController extends Controller
 
     // show the details of the selecting Profile
 
-    public function show(profile $id) // id qui herite mn le model profile
+    public function show(profile $id) // id qui herite a partir de module le model profile (biding medule )
     {
         // $id = (int) $request->id; // disgnate the type of the id
         // $Profiles = profile::findOrFail($id); // if the id is not exists retun page Not found
@@ -44,6 +44,7 @@ class ProfileController extends Controller
     }
 
     //model binding
+    // pour creer un profile
     public function Store(ProfileRequest $request) // $request contient un un validation a partir d'une make:request
     {
         //validation de inputs
@@ -83,10 +84,15 @@ class ProfileController extends Controller
 
         return view("Profile.UpdateProfile", compact("profil"));
     }
-    public function Update(ProfileRequest $request, profile $profile) // recupere les donne inser avec le id 
+    //  pour mofidier un profile
+    public function Update(ProfileRequest $request, profile $profile) 
+    // recupere les donne inser avec le $profile=id de peofile a modifier /
+    // and $request = formdata 
     {
+
         $ProfileValidated = $request->validated(); // validation les donne entrer
-        $ProfileValidated["password"] = Hash::make($profile->password);
+        $ProfileValidated["password"] = Hash::make($profile->password);// crypte le modt de passe
+        unset($ProfileValidated["image"]);//unset pour vider la varible/ for keep the old picture if no update on image has done 
         if ($request->hasFile("image")) {
             $filename = $request->file("image")->store("profile", "public"); // return un chaine de caractere qui conteint le chemin de la photo 
             $ProfileValidated["image"] = $filename;

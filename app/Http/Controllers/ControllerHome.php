@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\profile;
 class ControllerHome extends Controller
 {
-    public function call(Request $request)
+    public function Home(Request $request)
     {
         // $Profiles = profile::all();
         // // dd($Profiles);

@@ -24,7 +24,7 @@ class profile extends Model /* la table de la base donnes */
     
     public function getImageAttribute($value)
     {
-        return $value??"profile/default.jpg";// ?? =or si la valeur de l'image existe ok / si Non prendre default.jpg comme valeur
+        return  ($value) ? $value : "default.png" ;;// ?? =or si la valeur de l'image existe ok / si Non prendre default.jpg comme valeur
     }
     function getRouteKeyName()
     {
