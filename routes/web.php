@@ -4,6 +4,7 @@ use App\Http\Controllers\ControllerHome;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\informationController;
 use App\Http\Controllers\LoginController;
+use App\Service\Somme;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProfileController;
@@ -29,8 +30,7 @@ Route::get('/Profile/create', [ProfileController::class, 'createView'])->name('c
 
 //// store the data dans la bs
 Route::post('/Profile/store', [ProfileController::class, 'Store'])->name('Store');
-
-
+//________delete___________
 // Delete Profile
 Route::delete("/Profile/delete/{profile}", [ProfileController::class, "destroy"])->name("destroy");
 //---------------- update--------------
@@ -41,13 +41,17 @@ Route::get("Profile/{profile}/edit", [ProfileController::class, "viewUpdate"])->
 
 
 
-
+//_________________login __________-_
 // login view
 Route::view('/Login', 'Login.LoginView')->name("Login");
 //login
 Route::post("/connected", [LoginController::class, "connection"])->name("connected");
 // logout
 Route::get("Logout", [LoginController::class, "Logout"])->name("Logout");
+// service container 
+Route::get("/calculer/{a}/{b}",function ($a,$b,Somme $Calc){
+   return $Calc->Somme($a,$b);
+});
 // retrive the delted data
 // Route::get("retrive",function(){
 //     return profile::withTrashed()->get();
