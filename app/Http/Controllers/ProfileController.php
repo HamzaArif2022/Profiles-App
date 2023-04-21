@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Hash;
-use function PHPSTORM_META\type;
 
 class ProfileController extends Controller
 {
@@ -23,7 +22,6 @@ class ProfileController extends Controller
         // $profiles = profile::find(2); find by id
         // dd($profiles->count()); return le nombre de document
         // dd($profiles->avg('id')); return lenght
-
         return view('Profile.Profile', compact('profiles')); //profiles is contient every row in from the table
     }
 
@@ -105,6 +103,11 @@ class ProfileController extends Controller
 
         return to_route("Profile.Details", $profile->id)->with("success", "votre Compte a ete Modifier ");
     }
+    //// Route Model binding le parameter $data is type profile table et ily base sur la colone id pass par type {date:id} 
+     public function getKeys(profile $data){
+        // dd( $data->id); on peut acceder les attribute par flech ->email ->email
+        dd( $data->id);
+     }
 
 
 

@@ -19,10 +19,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('create.profile') }}">AjouterProfile</a>
                 </li>
+               
                 @auth
                     {{-- if user is coonecter on affiche la Desconnexion --}}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('Logout') }}">Deconnecter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('publication.create') }}">Ajouter publication</a>
                     </li>
 
                 @endauth

@@ -8,7 +8,7 @@
                         <div class="row g-0">
                             <div class="col-md-4 gradient-custom text-center text-black"
                                 style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                                <img  src="{{ asset('storage/' . $Profiles['image']) }}" alt="Avatar"
+                                <img  src="{{ asset('storage/'.$Profiles['image']) }}" alt="Avatar"
                                     class="img-fluid my-5" style="width: 90px;" />
                                 <h5>hamza</h5>
                                 <p>Web Designer</p>
@@ -52,6 +52,8 @@
                 </div>
             </div>
         </div>
+        
     </section>
+    
 
 </x-master>

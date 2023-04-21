@@ -27,7 +27,8 @@
             </form>
         </div>
 
-
-
     </div>
+    {{-- list des publications de specific user --}}
+
+</div>
 </div>

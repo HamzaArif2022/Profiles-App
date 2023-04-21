@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PublicationRequest;
 use App\Models\Publication;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class PublicationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("auth");
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,9 @@ class PublicationController extends Controller
      */
     public function index()
     {
-        //
+        $publication = Publication::all();
+
+        return view("publication.index", compact("publication"));
     }
 
     /**
@@ -24,7 +33,7 @@ class PublicationController extends Controller
      */
     public function create()
     {
-        //
+        return view("publication.PublicCreate");
     }
 
     /**
@@ -33,9 +42,18 @@ class PublicationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PublicationRequest $request)
     {
-        //
+        $formFeiled = $request->validated();
+        if ($request->hasFile("image")) {
+            $path = $request->file("image")->store("publication", "public");
+            $formFeiled["image"] = $path;
+        }
+        $formFeiled["profile_id"] = Auth::id();
+        Publication::create($formFeiled);
+        return to_route("publication.index");
+
+
     }
 
     /**
@@ -57,7 +75,7 @@ class PublicationController extends Controller
      */
     public function edit(Publication $publication)
     {
-        //
+        return view("publication.UpdatePublication", compact("publication"));
     }
 
     /**
@@ -67,9 +85,16 @@ class PublicationController extends Controller
      * @param  \App\Models\Publication  $publication
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Publication $publication)
+    public function update(PublicationRequest $request, Publication $publication)
     {
-        //
+        $pub = $request->validated();
+        if ($request->hasFile("image")) {
+            $path = $request->file("image")->store("publication", "public");
+            $pub["image"] = $path;
+        }
+        $isUpdated = $publication->fill($pub)->save();
+
+        return to_route("publication.index");
     }
 
     /**
@@ -80,6 +105,8 @@ class PublicationController extends Controller
      */
     public function destroy(Publication $publication)
     {
-        //
+        $publication->delete();
+        return to_route("publication.index")->with("message", "bien supprimer");
+
     }
 }

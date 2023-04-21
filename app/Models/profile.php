@@ -22,13 +22,16 @@ class profile extends Model /* la table de la base donnes */
     // protected $dates=['created_at'];// pour affiche $request->created_at->format("d-m-y)
     //   public   $table= 'profiles';
     
-    public function getImageAttribute($value)
+    /* public function getImageAttribute($value)
     {
         return  ($value) ? $value : "default.png" ;;// ?? =or si la valeur de l'image existe ok / si Non prendre default.jpg comme valeur
-    }
+    } */
     function getRouteKeyName()
     {
-        return "id"; // Model binding: tout les parameter qui vous passer par url de type profiles table
+       return "id"; // Model binding: tout les parameter qui vous passer par url de type profiles table
+    }
+    public function publications(){
+       return  $this->hasMany(Publication::class);
     }
 }
 //pour specifie le column de selection from database
